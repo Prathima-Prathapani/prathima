@@ -17,7 +17,7 @@ public class DbConnection {
       if (dbc == null || dbc.equals("")) {
         dbc = "localhost:3306";
       }
-      DBI dbi = new DBI("jdbc:mysql://" + dbc + "/MLP206?useSSL=false", "MLP206", "MLP206");
+      DBI dbi = new DBI("jdbc:mysql://" + dbc + "/MLP206?   ", "MLP206", "MLP206");
       dbi.setSQLLog(new PrintStreamLog());
       return dbi;
     } catch (ClassNotFoundException e) {

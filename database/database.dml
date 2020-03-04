@@ -1,0 +1,26 @@
+-- change this to your team id
+use MLP206;
+
+insert into employee values (50975,'prathima','trainee',null,'chennai',7896,'abc','2020-01-09', 20),
+ (50996,'anisha','train',50975,'bihar',75767,'qwe','2020-01-10', 21),
+ (50959,'srinivas','teamleader',50996,'mareina',784665,'asd','2020-01-11', 22),
+ (50983,'sowmya','mad',50959,'hyd',785696,'asdf','2020-01-12', 23),
+ (50960,'dawar','pagal',50996,'assam',75787,'fgh','2020-01-13', 24);
+
+insert into leev values(31,'sick','fever','approved','2020-01-12','2020-01-14',50975,2,'fever','2020-01-11'),
+(32,'maternity','pains','approved','2020-01-14','2020-01-16',50975,2,'not feeling well','2020-01-13'),
+(33,'maternity','having baby','approved','2020-01-16','2020-01-30',50959,15,'went through surgery','2020-01-15'),
+(34,'sick','headache','rejected','2020-01-02','2020-01-04',50983,2,'sick','2020-01-01'),
+(35,'sick','dengue','approved','2020-01-03','2020-01-10',50959,7,'sick','2020-01-02');
+
+insert into leev_type values("maternity",12,12,1),("maternity",12,12,2),("maternity",12,12,3),
+                            ("maternity",12,12,4),("maternity",12,12,5),("sick",4,4,1),("sick",4,4,2),
+                            ("sick",4,4,3),("sick",4,4,4),("sick",4,4,5),("earned",3,3,1),
+							("earned",3,3,2),("earned",3,3,3),("earned",3,3,4),("earned",3,3,5);
+
+                            
+--select leev
+select * from leev ;
+
+--select Employees
+select *from employee;

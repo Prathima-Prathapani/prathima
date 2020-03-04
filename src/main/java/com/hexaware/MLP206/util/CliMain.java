@@ -9,20 +9,64 @@ import com.hexaware.MLP206.model.leev;
  * Class CliMain provides the command line interface to the leavemanagement
  * application.
  */
-public class CliMain {
+public class CliMain
+{
   private Scanner option = new Scanner(System.in, "UTF-8");
+  private String empId;
+  
+  // Menu
 
-  private void mainMenu() {
+  
+  private void mainMenu()
+  {
     System.out.println("Leave Management System");
     System.out.println("-----------------------");
-    System.out.println("1. List All Employees Info");
-    System.out.println("2. Display Employee Info");
-    System.out.println("3. approvedeny");
+    System.out.println("1. Emloyees Menu");
+    System.out.println("2. Leaves Menu");
+    System.out.println("3. Exit");
+
     System.out.println("Enter your choice:");
-    int menuOption = option.nextInt();
-    mainMenuDetails(menuOption);
+    int ch = option.nextInt();
+
+
+    // Menu for Employee list
+    switch(ch)
+    {
+      case 1:
+      System.out.println("1. List All Employees Info");
+      System.out.println("2. List Employee Info"); 
+      System.out.println("3. Back to main menu");
+      System.out.println("Enter your choice:");
+      int menuOption = option.nextInt(); 
+      mainMenuDetails(menuOption);
+      break;
+
+
+     // Menu for Leave List
+      case 2:
+      System.out.println("4.Apply for Leaves");
+      System.out.println("5.Check leave status");
+      System.out.println("6.Edit Leaves");
+      System.out.println("7.Cancel Leaves");
+      System.out.println("8.Check Leaves Available");
+      System.out.println("9.Leave History");
+      System.out.println("10.Update Leaves");
+      System.out.println("11.Back to Main menu");
+      System.out.println("Enter your choice:");
+      int menuOption1 = option.nextInt();
+      mainMenuDetails(menuOption1);
+      break;
+
+
+     //Out of the Menu list
+      case 3:
+        // halt since normal exit throws a stacktrace due to jdbc threads not responding
+        Runtime.getRuntime().halt(0);
+    }
+  
+
   }
-  private void mainMenuDetails(final int selectedOption) {
+   private void mainMenuDetails(final int selectedOption) {
     switch (selectedOption) {
       case 1:
         listEmployeesDetails();
@@ -31,45 +75,73 @@ public class CliMain {
         listEmployeeDetail();
         break;
       case 3:
-         approveDeny();
-         break;
+        mainMenu(); 
+        break;
       case 4:
-          leaveHistory();
-          break;
+        approveDeny();
+        break;
       case 5:
-        // halt since normal exit throws a stacktrace due to jdbc threads not responding
-        Runtime.getRuntime().halt(0);
-      
+        leaveHistory();
+        break;
       default:
-        System.out.println("Choose either 1, 2 or 3");
+        System.out.println("sorry you cannot Enjoy"); 
     }
-    mainMenu();
+     mainMenu();
   }
-  private void listEmployeeDetail() {
+
+  //Login Method
+
+  public void login(){
+     System.out.println("Enter user_id: ");
+     Scanner sc = new Scanner (System.in);
+     int id = sc.nextInt();
+
+     System.out.println("Enter Password: ");
+     String password = sc.next();
+     if((id==100) && password.equals("dawar")){
+       System.out.println("login sucessful");
+               mainMenu();
+     }else{
+      System.out.println("something is wrong!!!");
+     }
+  }
+
+   // List of Employee info
+    private void listEmployeeDetail()
+ {
     System.out.println("Enter an Employee Id");
-    int empId = option.nextInt();
+    int empId= option.nextInt();
     Employee employee = Employee.listById(empId);
-    if (employee == null) {
+    if (employee == null) 
+    { 
       System.out.println("Sorry, No such employee");
-    } else {
-      System.out.println(employee.getEmpId()+employee.getname()+employee.getdes()+employee.getmgr_id()+employee.getphno()+employee.getmail());
+    } else
+   {
+      System.out.println(employee.gete_id()+ " "+employee.gete_name()+" "+ employee.gete_add()+" "+ employee.getmgr_id()+" "+ employee.gete_phno()+" " + employee.gete_mail()+" "+ employee.getDOJ()+ " "+employee.getavail_l() );
     }
   }
-  private void listEmployeesDetails() {
+
+   //List of Employees Details
+  private void listEmployeesDetails() 
+  {
     Employee[] employee = Employee.listAll();
-    for (Employee e : employee) {
-      System.out.println(e.getEmpId()+e.getname()+e.getdes()+e.getmgr_id()+e.getphno()+e.getmail());
+    for (Employee e : employee) 
+    {
+      System.out.println(e.gete_id()+ " " +e.gete_name()+ " " +e.gete_des()+" " + e.getmgr_id()+" " +e.gete_add()+" " +e.gete_phno()+" "+e.gete_mail()+" "+e.getDOJ()+" "+e.getavail_l());
     }
   }
   /**
    * The main entry point.
    * @param ar the list of arguments
    */
-  public static void main(final String[] ar) {
+    public static void main(final String[] ar)
+  {
     final CliMain mainObj = new CliMain();
-    mainObj.mainMenu();
-  }
+            mainObj.login();
+  
 
+
+  }
   public static void approveDeny() {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter a leave ID:");
@@ -84,15 +156,15 @@ public class CliMain {
   }
 
 
-  private void leaveHistory() {
+ private void leaveHistory() {
     int empid = 0;
     while (true) {
       System.out.println("Enter an Employee Id");
       String empId = option.next();
       try {
         empid = Integer.parseInt(empId);
-        Employee.listById(empid);
-        leev[] leaves = leev.leaveHistory(empid);
+        //Employee emp= Employee.listById(empid);
+         leev[] leaves = leev.leaveHistory(empid);
         if (leaves.length == 0) {
           System.out.println("Sorry, No such employee History..");
         } else {
@@ -121,7 +193,14 @@ public class CliMain {
     }
   }
 
+
+}  
   
-public void login() {
-}
-}
+
+
+    
+
+    
+  
+
+

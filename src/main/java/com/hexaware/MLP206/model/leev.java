@@ -432,8 +432,8 @@ private static EmployeeDAO edao() {
   //   return dao().showManager(leaveId);
   // }
    //count no of days for applied leaves
-   public static int countNo(final int empId, final String startDate, final String endDate) {
-    int count = dao().count(empId, startDate, endDate);
+   public static int countNo(final int e_id, final String startDate, final String endDate) {
+    int count = dao().count(e_id, startDate, endDate);
     return count;
   }
 

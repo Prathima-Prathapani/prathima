@@ -13,33 +13,16 @@ import java.util.List;
  * The DAO class for employee.
  */
 public interface EmployeeDAO  {
-  
-  @SqlUpdate("insert into Employee(empId,e_name,e_des,mgr_id,e_add,e_phno,e_mail) values(:e_id, :e_name, e_des, : mgr_id, :e_add, :e_phno, :e_mail)")
-  void insertEmployee
-  (
-    @Bind ("empId") int empId,
-    @Bind ("e_name") String e_name,
-    @Bind ("e_des") String e_des,
-    @Bind ("mgr_id") int mgr_id,
-    @Bind ("e_add") String e_add,
-    @Bind ("e_phno") double e_phno,
-    @Bind ("e_mail") String e_mail
-    );
 
   /**
    * return all the details of all the employees.
    * @return the employee array
    */
-  @SqlQuery("SELECT * FROM EMPLOYEE")
+  @SqlQuery("SELECT * FROM Employee")
   @Mapper(EmployeeMapper.class)
   List<Employee> list();
 
-  @SqlUpdate("Delete from Employee where empId = :empId")
-    void deleteEmployee(
-      @Bind("empId") int empId
-      
-      );
-
+ 
   /**
    * return all the details of the selected employee.
    * @param empID the id of the employee
@@ -70,4 +53,6 @@ public interface EmployeeDAO  {
    */
   @SqlUpdate("UPDATE EMP_DETAILS SET AVAIL_LEAVE_BAL = AVAIL_LEAVE_BAL -:leaveTaken WHERE EMP_ID = :empID")
   void decrement(@Bind("empID") int empID, @Bind("leaveTaken") int leaveTaken);
+
+
 }
