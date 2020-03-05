@@ -28,283 +28,282 @@ enum LeaveType {
   }
 public class leev
 {
-     private int l_id;
-     private String l_type;
-     private String l_des;
-     private String l_status;
-     private Date l_startdate;
-     private Date l_enddate;
-     private int le_id;
+     private static int l_id;
+     private static String l_type;
+     private static String l_des;
+     private static String l_status;
+     private static Date l_startdate;
+     private static Date l_enddate;
+     private static int le_id;
      private int l_Ndays;
-     private String l_Reason;
-     private Date l_AppliedOn;
+     private static String l_Reason;
+     private static Date l_AppliedOn;
 
-     
+     static int counter = 2;
 
-     public final int getleev_id()
-     {
-         return l_id;
-     }
-     public final String getType()
-     {
-         return l_type;
-     }
-     public final String getdes()
-     {
-         return l_des;
-     }
-     public final String getStatus()
-     {
-         return l_status;
-     }
-     public final Date getStart_date()
-     {
-         return l_startdate;
-     }
-     public final Date getEnd_date()
-     {
-         return l_enddate;
-     }
-     public final int getleev_empid()
-     {
-         return le_id;
-     }
-     public final int getndays()
-     {
-         return l_Ndays;
-     }
-     public final String getreason()
-     {
-         return l_Reason;
-     }
-     public final Date getappdate()
-     {
-         return l_AppliedOn;
+     public final int getleev_id() {
+       return l_id;
      }
 
-   //setter methods
-    public final void setleev_id(int leev_id)
-   {
-       this.l_id=leev_id;
-   }
-    public final void setType( String Type)
-   {
-       this.l_type=Type;
-   }
-    public final void Setdes (String l_des)
-   {
-       this.l_des= l_des;
-   }
-   public final void setStatus(String status)
-   {
-       this.l_status=status;
-   }
-    public final void setstartdate(Date leev_start_date)
-   {
-       this.l_startdate=leev_start_date;
-   }
-   public final void setenddate (Date leev_end_date)
-   {
-       this.l_enddate= leev_end_date;
-   }
-   public final void setemp_id (int leev_empid)
-   {
-       this.le_id=leev_empid;
-   }
-   public final void setlndays(int lee_ndays)
-   {
-       this.l_Ndays=lee_ndays;
-   }
-   public final void setreason(String lee_r){
-       this.l_Reason=lee_r;
-   }
-   public final void setappdate(Date lee_date)
-   {
-       this.l_AppliedOn=lee_date;
-   }
-   //hashcode
-
-   @Override
-  public final int hashCode() {
-    return Objects.hash(l_id, le_id,l_type,l_des,l_status,l_startdate,l_enddate,l_Ndays,l_Reason,l_AppliedOn);
-  }
-  //default constructor
-  public leev() {
-    }
-
-
-   @Override
-   public final boolean equals(final Object obj) {
-     if (obj == null) {
-       return false;
+     public final String getType() {
+       return l_type;
      }
-     if (getClass() != obj.getClass()) {
-       return false;
+
+     public final String getdes() {
+       return l_des;
      }
-     leev l= (leev) obj;
-     if (Objects.equals(l_id, l.l_id)&& Objects.equals(l.l_type,l.l_type)&& Objects.equals(l.l_des,l.l_des)
-          && Objects.equals(l_status,l.l_status) && Objects.equals(l_startdate,l.l_startdate)
-          && Objects.equals(l_enddate,l.l_enddate)
-          && Objects.equals(le_id,l.le_id)&& Objects.equals(l_Ndays, l.l_Ndays)&& Objects.equals(l_Reason, l.l_Reason)
-          && Objects.equals(l_AppliedOn, l.l_AppliedOn))
-           {
-       return true;
+
+     public final String getStatus() {
+       return l_status;
      }
-     return false;
-   }
-   public leev(int i){
 
-   }
-   /**
-   * @param argEmpId to initialize employee id.
-   */
-  public leev(final int l_id,final String l_type,final String l_des,
-  final String status,final Date leev_start_dDate,final Date leev_endDate,final int leev_emp_id,final int ln,
-     final String r,final Date ld)
-   {
-    this.l_id =l_id;
-    this.l_type=l_type;
-    this.l_des=l_des;
-    this.l_startdate=leev_start_dDate;
-    this.l_enddate=leev_endDate;
-    this.le_id=leev_emp_id;
-    this.l_Ndays=ln;
-    this.l_Reason=r;
-    this.l_AppliedOn=ld;
-  }
- 
+     public final Date getStart_date() {
+       return l_startdate;
+     }
 
+     public final Date getEnd_date() {
+       return l_enddate;
+     }
 
-  @Override
-  public String toString() {
-    return  " leave Id: " + l_id + "leave designation: " + l_des + "leave status: "+ l_status 
-    + "leave startdate: " + l_startdate + "leave enddate: " + l_enddate + "leave employee_id: " +
-     le_id +l_Ndays+l_Reason+l_AppliedOn;
+     public final int getleev_empid() {
+       return le_id;
+     }
+
+     public final int getndays() {
+       return l_Ndays;
+     }
+
+     public final String getreason() {
+       return l_Reason;
+     }
+
+     public final Date getappdate() {
+       return l_AppliedOn;
+     }
+
+     // setter methods
+     public final void setleev_id(int leev_id) {
+       this.l_id = leev_id;
+     }
+
+     public final void setType(String Type) {
+       this.l_type = Type;
+     }
+
+     public final void Setdes(String l_des) {
+       this.l_des = l_des;
+     }
+
+     public final void setStatus(String status) {
+       this.l_status = status;
+     }
+
+     public final void setstartdate(Date leev_start_date) {
+       this.l_startdate = leev_start_date;
+     }
+
+     public final void setenddate(Date leev_end_date) {
+       this.l_enddate = leev_end_date;
+     }
+
+     public final void setemp_id(int leev_empid) {
+       this.le_id = leev_empid;
+     }
+
+     public final void setlndays(int lee_ndays) {
+       this.l_Ndays = lee_ndays;
+     }
+
+     public final void setreason(String lee_r) {
+       this.l_Reason = lee_r;
+     }
+
+     public final void setappdate(Date lee_date) {
+       this.l_AppliedOn = lee_date;
+     }
+     // hashcode
+
+     @Override
+     public final int hashCode() {
+       return Objects.hash(l_id, le_id, l_type, l_des, l_status, l_startdate, l_enddate, l_Ndays, l_Reason,
+           l_AppliedOn);
+     }
+
+     // default constructor
+     public leev() {
+     }
+
+     @Override
+     public final boolean equals(final Object obj) {
+       if (obj == null) {
+         return false;
        }
-
-
-public static String approveDeny(
-    final int l_id,
-    final int empId, final String l_status){
-   leev ld = leev.listById(l_id);
-   String res = null;
-   if (ld != null) {
-     int noOfDays = ld.getndays();
-     int emplId = ld.getleev_id();
-     int empdId = leev.showManager(l_id);
-     String dbStatus = null;
-     System.out.println(l_status);
-     System.out.println(ld.getStatus());
-     if (empId != empdId) {
-       res = "You are not authorised to access this employee.";
-       return res;
+       if (getClass() != obj.getClass()) {
+         return false;
+       }
+       leev l = (leev) obj;
+       if (Objects.equals(l_id, l.l_id) && Objects.equals(l.l_type, l.l_type) && Objects.equals(l.l_des, l.l_des)
+           && Objects.equals(l_status, l.l_status) && Objects.equals(l_startdate, l.l_startdate)
+           && Objects.equals(l_enddate, l.l_enddate) && Objects.equals(le_id, l.le_id)
+           && Objects.equals(l_Ndays, l.l_Ndays) && Objects.equals(l_Reason, l.l_Reason)
+           && Objects.equals(l_AppliedOn, l.l_AppliedOn)) {
+         return true;
+       }
+       return false;
      }
-     if (l_status.equals("APPROVE") && 
-     ld.getStatus().equals("PENDING")) {
-         dbStatus = "APPROVED";
-         res = "Leave Approved Successfully";
-        
-     } else if (l_status.equals("DENY") && ld.getStatus().equals("APPROVED")) {
-         dbStatus = "REJECTED";
-         edao().increment(emplId, noOfDays);
-        
-         res = "Leave Rejected";
-     } else if (l_status.equals("APPROVE") && ld.getStatus().equals("REJECTED")) {
-         dbStatus = "APPROVED";
-         edao().decrement(emplId, noOfDays);   
-         res = "Leave Approved Successfully";
-     } else {
-         if (l_status.equals("DENY") && ld.getStatus().equals("PENDING")) {
+
+     public leev(int i) {
+
+     }
+
+     /**
+      * @param argEmpId to initialize employee id.
+      */
+     public leev(final int l_id, final String l_type, final String l_des, final String status,
+         final Date leev_start_dDate, final Date leev_endDate, final int leev_emp_id, final int ln, final String r,
+         final Date ld) {
+       this.l_id = l_id;
+       this.l_type = l_type;
+       this.l_des = l_des;
+       this.l_startdate = leev_start_dDate;
+       this.l_enddate = leev_endDate;
+       this.le_id = leev_emp_id;
+       this.l_Ndays = ln;
+       this.l_Reason = r;
+       this.l_AppliedOn = ld;
+     }
+
+     @Override
+     public String toString() {
+       return " leave Id: " + l_id + "leave designation: " + l_des + "leave status: " + l_status + "leave startdate: "
+           + l_startdate + "leave enddate: " + l_enddate + "leave employee_id: " + le_id + l_Ndays + l_Reason
+           + l_AppliedOn;
+     }
+
+     public static String approveDeny(final int l_id, final int empId, final String l_status) {
+       leev ld = leev.listById(l_id);
+       String res = null;
+       if (ld != null) {
+         int noOfDays = ld.getndays();
+         int emplId = ld.getleev_id();
+         int empdId = leev.showManager(l_id);
+         String dbStatus = null;
+         System.out.println(l_status);
+         System.out.println(ld.getStatus());
+         if (empId != empdId) {
+           res = "You are not authorised to access this employee.";
+           return res;
+         }
+         if (l_status.equals("APPROVE") && ld.getStatus().equals("PENDING")) {
+           dbStatus = "APPROVED";
+           res = "Leave Approved Successfully";
+
+         } else if (l_status.equals("DENY") && ld.getStatus().equals("APPROVED")) {
+           dbStatus = "REJECTED";
+           edao().increment(emplId, noOfDays);
+
+           res = "Leave Rejected";
+         } else if (l_status.equals("APPROVE") && ld.getStatus().equals("REJECTED")) {
+           dbStatus = "APPROVED";
+           edao().decrement(emplId, noOfDays);
+           res = "Leave Approved Successfully";
+         } else {
+           if (l_status.equals("DENY") && ld.getStatus().equals("PENDING")) {
              dbStatus = "REJECTED";
              edao().increment(emplId, noOfDays);
-         res = "Leave Rejected";
+             res = "Leave Rejected";
+           } else {
+             res = "Already on given status";
+           }
+         }
        } else {
-         res = "Already on given status";
+         res = "Invalid LeaveId";
        }
+       return res;
      }
-   } else {
-     res = "Invalid LeaveId";
-   }
-   return res;
- }
 
- public static leev[]  leaveHistory(int empId)
- {
-   List<leev> es= dao().leaveHistory(empId);
-   return(es.toArray(new leev[es.size()]));
- }
+     public static leev[] leaveHistory(int empId) {
+       List<leev> es = dao().leaveHistory(empId);
+       return (es.toArray(new leev[es.size()]));
+     }
 
-//  public static String applyLeave(final int empId,
-//  final String startDate,
-//  final String endDate,
-//  final int noOfdays,
-//  final String leaveType,
-//  final String leaveReason
-// ) throws ParseException {
-// String s = null;
-// Employee emplo = Employee.listById(empId);
-// if (emplo != null) {
-// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-// Date stDate = sdf.parse(startDate);
-// Date enDate = sdf.parse(endDate);
-// Calendar start = Calendar.getInstance();
-// start.setTime(stDate);
-// Calendar end = Calendar.getInstance();
-// end.setTime(enDate);
-// int count = 0;
-// for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-// Calendar c = Calendar.getInstance();
-// c.setTime(date);
-// int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-// if (dayOfWeek == 1 || dayOfWeek == 7) {
-// count++;
-// }
-// }
-// System.out.println(count);
-// long diff = enDate.getTime() - stDate.getTime();
-// System.out.println(diff);
-// long days = diff / (1000 * 60 * 60 * 24);
-// Date today = new Date();
-// String appliedOn = sdf.format(today);
-// days = days + 1;`
-// long availBal = 0;
-// long dif = 0;
-// long updLeave = 0;
-// String leaveStatus = null;
-// int overl = leev.countNo(empId, startDate, endDate);
-// availBal = emplo.getavail_l();
-// dif = availBal - days;
-// updLeave = days - count;
-// int bal = (int) updLeave;
-// if (days <= 0) {
-// s = "Start Date Must be Greater than EndDate...";
-// } else if (dif < 0) {
-// s = "insufficient leav balance";
-// } else if (noOfdays != days) {
-// s = "NO Of Days Should be right";
-// } else if (stDate.compareTo(sdf.parse(appliedOn)) < 0) {
-// s = "Start should be greater or equal to current date";
-// } else if (overl > 0) {
-// s = "already applied on given date";
-// } else {
-// if (emplo.getmgr_id() == 0) {
-// leaveStatus = "APPROVED";
-// dao().apply(empId, startDate, endDate, bal,
-// leaveType, leaveStatus, leaveReason, appliedOn);
-// s = "Leave Applied Successfully...";
-// } else {
-// leaveStatus = "PENDING";
-// dao().apply(empId, startDate, endDate, bal,
-// leaveType, leaveStatus, leaveReason, appliedOn);
-// edao().decrement(empId, bal);
-// s = "Leave Applied Successfully For "  + (days - count) + " Days.";
-// }
-// }
-// } else {
-// s = "invalid employee";
-// }
-// return s;
-// }
+     public static String applyLeave(final int empId, final String startDate, final String endDate, final int noOfdays,
+         final String leaveType, final String leaveReason) throws ParseException {
+       String s = null;
+
+       Employee emplo = Employee.listById(empId);
+     //  LeaveType lt = LeaveType.valueOf(leaveType);
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+         Date l_startdate = sdf.parse(startDate);
+         Date l_enddate = sdf.parse(endDate);
+
+       if (emplo != null) {
+         
+         
+         Calendar start = Calendar.getInstance();
+         start.setTime(l_startdate);
+         Calendar end = Calendar.getInstance();
+         end.setTime(l_enddate);
+         int count = 0;
+         for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+           Calendar c = Calendar.getInstance();
+           c.setTime(date);
+           int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+           if (dayOfWeek == 1 || dayOfWeek == 7) {
+             count++;
+           }
+         }
+         System.out.println(count);
+
+         long diff = l_enddate.getTime() - l_startdate.getTime();
+         System.out.println(diff);
+
+         long days = diff / (1000 * 60 * 60 * 24);
+         Date today = new Date();
+         String appliedOn = sdf.format(today);
+         Date appliedDate = sdf.parse(appliedOn);
+         days = days + 1;
+
+         long availBal = 0;
+         long dif = 0;
+         long updLeave = 0;
+         String leaveStatus = null;
+
+         // int overl = leev.countNo(empId, stDate, enDate);
+         availBal = emplo.getavail_l();
+         dif = availBal - days;
+         updLeave = days - count;
+         int bal = (int) updLeave;
+
+         if (days <= 0) {
+           s = "Start Date Must be Greater than EndDate...";
+         } else if (dif < 0) {
+           s = "insufficient leav balance";
+         } else if (noOfdays != days) {
+           s = "NO Of Days Should be right";
+         } else if (l_startdate.compareTo(sdf.parse(appliedOn)) < 0) {
+           s = "Start should be greater or equal to current date";
+           // } else if (overl > 0) {
+           // s = "already applied on given date";
+         } else {
+           if (emplo.getmgr_id() == 0) {
+             leaveStatus = "APPROVED";
+             dao().apply(empId, leaveType, leaveStatus, l_startdate, l_enddate, emplo.gete_id(), bal, l_Reason, appliedDate);
+          s = "Leave Applied Successfully...";
+        } else {
+          leaveStatus = "PENDING";
+          dao().apply(empId,leaveType, leaveStatus, l_startdate, l_enddate, emplo.gete_id(), bal, l_Reason, appliedDate);
+          edao().decrement(empId, bal);
+          s = "Leave Applied Successfully For "  + (days - count) + " Days.";
+        }
+      }
+    } else {
+      s = "invalid employee";
+  }
+  return s;
+}
+
 // public static String updateLeave(final int empId,
 //   final String startDate,
 //   final String endDate,
@@ -432,10 +431,10 @@ private static EmployeeDAO edao() {
   //   return dao().showManager(leaveId);
   // }
    //count no of days for applied leaves
-   public static int countNo(final int e_id, final String startDate, final String endDate) {
-    int count = dao().count(e_id, startDate, endDate);
-    return count;
-  }
+  //  public static int countNo(final int e_id, final Date startDate, final Date endDate) {
+  //   int count = dao().count(e_id, startDate, endDate);
+  //   return count;
+  // }
 
   
 

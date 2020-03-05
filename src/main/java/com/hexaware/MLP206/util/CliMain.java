@@ -1,5 +1,7 @@
 package com.hexaware.MLP206.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import com.hexaware.MLP206.model.Employee;
@@ -83,6 +85,9 @@ public class CliMain
       case 5:
         leaveHistory();
         break;
+      case 6:
+         applyLeave();
+         break;
       default:
         System.out.println("sorry you cannot Enjoy"); 
     }
@@ -192,6 +197,67 @@ public class CliMain
       }
     }
   }
+  private void applyLeave() {
+    int empid = 0;
+    while (true) {
+      System.out.println("Enter an Employee Id");
+      String empId = option.next();
+      try {
+        empid = Integer.parseInt(empId);
+        Employee.listById(empid).gete_id();
+        break;
+      } catch (NumberFormatException nfe) {
+        System.out.println();
+        System.out.println("-------------------------------------------");
+        System.out.println("-----Please enter correct employee id------");
+        System.out.println("-------------------------------------------");
+      } catch (NullPointerException e) {
+        System.out.println();
+        System.out.println("--------------No Such Employee---------------");
+        System.out.println("---------------------------------------------");
+        System.out.println("-----Please enter correct employee id--------");
+        System.out.println("---------------------------------------------");
+      }
+    }
+    System.out.println();
+    System.out.println("Your available leave balance is: " + Employee.listById(empid).getAvailableLeave(empid));
+    String endDate = null;
+    String startDate = null;
+    while (true) {
+      try {
+        System.out.println("Enter Start Date of your leave (yyyy-MM-dd): ");
+        startDate = option.next();
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrmt.setLenient(false);
+        sdfrmt.parse(startDate);
+        System.out.println("Enter End Date of your leave (yyyy-MM-dd): ");
+        endDate = option.next();
+        SimpleDateFormat sdfrm = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrm.setLenient(false);
+        sdfrm.parse(endDate);
+        break;
+      } catch (ParseException ex) {
+        System.out.println("------------------------------");
+        System.out.println("Please enter in correct date/format.");
+        System.out.println("------------------------------");
+      }
+    }
+    System.out.println("Enter the number of days you want leave for: ");
+    int noOfdays = option.nextInt();
+    System.out.println("Enter the type of leave you want. (EL / SL / ML): ");
+    String leaveType = option.next();
+    System.out.println("Please mention the reason for taking leave: ");
+    String leaveReason = option.next();
+    String res = null;
+    try {
+      
+      res = leev.applyLeave(empid, startDate, endDate, noOfdays, leaveType.toUpperCase(), leaveReason);
+    } catch (ParseException e) {
+      System.out.println(e.getMessage());
+    }
+    System.out.println(res);
+  }
+
 
 
 }  
@@ -199,8 +265,3 @@ public class CliMain
 
 
     
-
-    
-  
-
-

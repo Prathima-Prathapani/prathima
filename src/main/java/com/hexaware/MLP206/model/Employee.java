@@ -233,5 +233,9 @@ public class Employee
     return dao().find(emp_id);
   }
 
+public Employee getAvailableLeave(final int empId) {
+	return dao().find(empId);
+}
+
 
 }
