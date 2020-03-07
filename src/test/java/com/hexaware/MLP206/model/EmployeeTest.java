@@ -28,6 +28,8 @@ import java.util.Date;
 public class EmployeeTest 
 {
 
+  Employee e;
+
   /**
    * setup method.
    */
@@ -39,6 +41,21 @@ public class EmployeeTest
   /**
    * Tests the equals/hashcode methods of the employee class.
    */
+  // @Test
+  // public final void testEmployee() {
+  //   Employee e100 = new Employee(100);
+  //   Employee e101 = new Employee(101);
+  //   assertNotEquals(e100, null);
+  //   assertNotEquals(e100, new Integer(100));
+  //   assertEquals(e100, new Employee(100));
+  //   assertNotEquals(e101, new Employee(100));
+  //   assertEquals(e100.hashCode(), new Employee(100).hashCode());
+  //   assertEquals(e100.getEmpId(), new Employee(100).getEmpId());
+  //   e101.setEmpId(100);
+  //   assertEquals(e101, new Employee(100));
+  // }
+
+  // tests the setters/getters method of employee class
   @Test
   public final void Employee() throws ParseException
    {
@@ -62,30 +79,33 @@ public class EmployeeTest
     
 
 
+
   /**
    * tests that empty employee list is handled correctly.
    * @param dao mocking the dao class
    */
-  @Test
-  public final void testListAllEmpty(@Mocked final EmployeeDAO dao) {
-    new Expectations() {
-      {
-        dao.list(); result = new ArrayList<Employee>();
-      }
-    };
-    new MockUp<Employee>() {
-      @Mock
-      EmployeeDAO dao() {
-        return dao;
-      }
-    };
-    Employee[] es = Employee.listAll();
-    assertEquals(0, es.length);
-  }
+  // @Test
+  // public final void testListAllEmpty(@Mocked final EmployeeDAO dao) {
+  //   new Expectations() {
+  //     {
+  //       dao.list(); result = new ArrayList<Employee>();
+  //     }
+  //   };
+  //   new MockUp<Employee>() {
+  //     @Mock
+  //     EmployeeDAO dao() {
+  //       return dao;
+  //     }
+  //   };
+  //   Employee[] es = Employee.listAll();
+  //   assertEquals(0, es.length);
+  // }
 
   /**
    * Tests that a list with some employees is handled correctly.
+   * 
    * @param dao mocking the dao class
+   * @throws ParseException
    */
   // @Test
   // public final void testListAllSome(@Mocked final EmployeeDAO dao) {

@@ -85,7 +85,7 @@ public class CliMain
       case 5:
         leaveHistory();
         break;
-      case 6:
+        case 6:
          applyLeave();
          break;
       default:
@@ -181,6 +181,7 @@ public class CliMain
                 + e.getappdate() );
           }
         }
+       
        // break;
       } catch (NumberFormatException nfe) {
         System.out.println("-------------------------------------------");
@@ -263,5 +264,3 @@ public class CliMain
 }  
   
 
-
-    

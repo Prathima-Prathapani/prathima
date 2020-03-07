@@ -25,9 +25,8 @@ public interface leevDAO {
   leev find(@Bind("leaveid") int leaveid);
 
   //leavemanagercomm Updated Manager Response data.
-//   @SqlUpdate("UPDATE leev SET COMMENTS = :leavemanagercomm, LEAVE_STATUS = :leavestatus WHERE "
-//       + "l_id= :leaveid")
-// void comment(String mgrComments, String dbStatus, int l_id);
+   @SqlUpdate("UPDATE leev SET  LEAVE_STATUS = :leavestatus WHERE " + "l_id= :leaveid")
+ void comment( String dbStatus, int l_id);
 
 //return the Leavedetails object
 @SqlQuery("SELECT * FROM leev WHERE "

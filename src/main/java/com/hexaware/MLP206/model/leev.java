@@ -30,7 +30,7 @@ public class leev
 {
      private static int l_id;
      private static String l_type;
-     private static String l_des;
+    // private static String l_des;
      private static String l_status;
      private static Date l_startdate;
      private static Date l_enddate;
@@ -49,9 +49,9 @@ public class leev
        return l_type;
      }
 
-     public final String getdes() {
-       return l_des;
-     }
+    //  public final String getdes() {
+    //    return l_des;
+    //  }
 
      public final String getStatus() {
        return l_status;
@@ -90,9 +90,9 @@ public class leev
        this.l_type = Type;
      }
 
-     public final void Setdes(String l_des) {
-       this.l_des = l_des;
-     }
+    //  public final void Setdes(String l_des) {
+    //    this.l_des = l_des;
+    //  }
 
      public final void setStatus(String status) {
        this.l_status = status;
@@ -125,12 +125,12 @@ public class leev
 
      @Override
      public final int hashCode() {
-       return Objects.hash(l_id, le_id, l_type, l_des, l_status, l_startdate, l_enddate, l_Ndays, l_Reason,
+       return Objects.hash(l_id, le_id, l_type, l_status, l_startdate, l_enddate, l_Ndays, l_Reason,
            l_AppliedOn);
      }
 
      // default constructor
-     public leev() {
+     public leev(int i, LeaveType sl, Date date, Date date2, int j, int k, String string, Date date3) {
      }
 
      @Override
@@ -142,8 +142,7 @@ public class leev
          return false;
        }
        leev l = (leev) obj;
-       if (Objects.equals(l_id, l.l_id) && Objects.equals(l.l_type, l.l_type) && Objects.equals(l.l_des, l.l_des)
-           && Objects.equals(l_status, l.l_status) && Objects.equals(l_startdate, l.l_startdate)
+       if (Objects.equals(l_id, l.l_id) && Objects.equals(l.l_type, l.l_type) && Objects.equals(l_status, l.l_status) && Objects.equals(l_startdate, l.l_startdate)
            && Objects.equals(l_enddate, l.l_enddate) && Objects.equals(le_id, l.le_id)
            && Objects.equals(l_Ndays, l.l_Ndays) && Objects.equals(l_Reason, l.l_Reason)
            && Objects.equals(l_AppliedOn, l.l_AppliedOn)) {
@@ -159,12 +158,11 @@ public class leev
      /**
       * @param argEmpId to initialize employee id.
       */
-     public leev(final int l_id, final String l_type, final String l_des, final String status,
+     public leev(final int l_id, final String l_type, final String status,
          final Date leev_start_dDate, final Date leev_endDate, final int leev_emp_id, final int ln, final String r,
          final Date ld) {
        this.l_id = l_id;
        this.l_type = l_type;
-       this.l_des = l_des;
        this.l_startdate = leev_start_dDate;
        this.l_enddate = leev_endDate;
        this.le_id = leev_emp_id;
@@ -173,9 +171,14 @@ public class leev
        this.l_AppliedOn = ld;
      }
 
-     @Override
+     
+
+	public leev() {
+	}
+
+	@Override
      public String toString() {
-       return " leave Id: " + l_id + "leave designation: " + l_des + "leave status: " + l_status + "leave startdate: "
+       return " leave Id: " + l_id  + "leave status: " + l_status + "leave startdate: "
            + l_startdate + "leave enddate: " + l_enddate + "leave employee_id: " + le_id + l_Ndays + l_Reason
            + l_AppliedOn;
      }
@@ -420,6 +423,7 @@ private static EmployeeDAO edao() {
   public static leev listById(final int leaveId) {
     return dao().find(leaveId);
   }
+
 
 //to get the emp details using empid
   // public static leev[] leaveHis(final int empId) {

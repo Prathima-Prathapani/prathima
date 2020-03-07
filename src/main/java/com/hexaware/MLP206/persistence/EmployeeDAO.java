@@ -1,7 +1,5 @@
 package com.hexaware.MLP206.persistence;
 
-import com.hexaware.MLP206.model.Employee;
-
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
@@ -9,11 +7,12 @@ import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
 import java.util.List;
 
+import com.hexaware.MLP206.model.Employee;
+
 /**
  * The DAO class for employee.
  */
 public interface EmployeeDAO  {
-
   /**
    * return all the details of all the employees.
    * @return the employee array
@@ -37,14 +36,18 @@ public interface EmployeeDAO  {
   */
   void close();
 
+  //manager id
 
-/**
+  // @SqlQuery("select * from employee e, employee f where e.e_id = f.mgr_id and e.mgr_id = :mgr_id")
+  // @Mapper(EmployeeMapper.class)
+  // List<Employee> findManager(@Bind("mgr_id") int mgr_id);
+  /**
    * return all the details of the selected employee.
    * @param empid the id of the employee
    * @param leavendays for leave no of days
    */
   @SqlUpdate("UPDATE EMP_DETAILS SET AVAIL_LEAVE_BAL = AVAIL_LEAVE_BAL +:leavendays WHERE EMP_ID = :empid")
-  void increment(@Bind("empid") int empid, @Bind("leavendays") int leavendays);
+  void increment(@Bind("empid") int empid, @Bind("l_Ndays") int leavendays);
 
   /**
    * Update LeaveBalance for selected employee.
