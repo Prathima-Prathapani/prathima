@@ -233,5 +233,9 @@ public class Employee
     return dao().find(emp_id);
   }
 
+public String getavail_l(int empid2) {
+	return null;
+}
+
 
 }

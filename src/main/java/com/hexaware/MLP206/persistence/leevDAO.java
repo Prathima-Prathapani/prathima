@@ -20,9 +20,9 @@ public interface leevDAO {
 
 //return all the details of the selected Leavedetails.
 
-  @SqlQuery("SELECT * FROM leev WHERE l_id = :leaveid")
+  @SqlQuery("SELECT * FROM leev WHERE l_id = :l_id")
   @Mapper(leevMapper.class)
-  leev find(@Bind("leaveid") int leaveid);
+  leev find(@Bind("l_id") int leaveid);
 
   //leavemanagercomm Updated Manager Response data.
    @SqlUpdate("UPDATE leev SET  LEAVE_STATUS = :leavestatus WHERE " + "l_id= :leaveid")
@@ -63,9 +63,10 @@ int count(@Bind("empId")int empId, @Bind("startDate")Date startDate, @Bind("endD
 //    @Bind("le_id") int le_id, @Bind("l_Ndays")int l_Ndays,  
 //    @Bind("l_Reason")String l_Reason, @Bind("l_AppliedOn") Date l_Appliedon);
     
-   @SqlUpdate("insert into leev values(:l_id,:l_type,:l_status, :l_startDate,:l_endDate,"
+   @SqlUpdate("insert into leev (l_id,l_type,l_status,l_startDate, l_enddate, le_id, l_ndays, l_reason, l_appliedon)"+
+   "values(:l_id,:l_type,:l_status, :l_startDate,:l_endDate,"
    +":le_id,:l_Ndays, :l_Reason,:l_AppliedOn)")
-void apply(@Bind("l_id")int l_id,  @Bind("l_type") String l_type, @Bind("l_status")String l_status,
+void apply(@Bind("l_id")int l_id,@Bind("l_type") String l_type, @Bind("l_status")String l_status,
   @Bind("l_startDate") Date l_startDate, @Bind("l_endDate") Date l_endDate,
    @Bind("le_id") int le_id, @Bind("l_Ndays")int l_Ndays,  
    @Bind("l_Reason")String l_Reason, @Bind("l_AppliedOn") Date l_Appliedon);
@@ -78,15 +79,22 @@ void updateLeave(@Bind("startDate")Date startDate, @Bind("endDate")Date endDate,
 		@Bind("leaveId")int leaveId);
 
 
-@SqlQuery("SELECT E1.EMP_ID FROM EMP_DETAILS E1  "
-      + " JOIN EMP_DETAILS E2 ON E1.Emp_ID=E2.MGR_ID WHERE E2.EMP_ID =(SELECT EMP_ID FROM LEAVE_DETAILS "
-      + "   WHERE LEAVE_ID=:leaveID)")
-   int showManager(@Bind("leaveID") int leaveID);
-   
+// @SqlQuery("SELECT E1.empId FROM Employee E1  "
+//       + " JOIN Employee E2 ON E1.empid=E2.mgr_id WHERE E2.empId =(SELECT le_id FROM leev "
+//       + " WHERE l_id=:l_id)")
+//    int showManager(@Bind("l_id") int l_id);
+   @SqlQuery("SELECT e1.mgr_id FROM employee e1"
+          + " JOIN employee e2 ON e2.mgr_id = e1.empid where e1.empid"
+          +" = (select le_id from leev where l_id = :l_id)")
+  int showManager(@Bind("l_id")int l_id);
 
    @SqlQuery("SELECT * FROM leev WHERE le_id = :empId")
    @Mapper(leevMapper.class)
    List<leev> leaveHistory(@Bind("empId") int empId);
+
+   @SqlQuery("SELECT * FROM LEEV ORDER BY L_ID DESC LIMIT 1")
+   @Mapper(leevMapper.class)
+   leev getLastRow();
 
 
 

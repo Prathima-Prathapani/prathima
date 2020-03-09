@@ -10,34 +10,20 @@ import java.util.Objects;
 import com.hexaware.MLP206.persistence.DbConnection;
 import com.hexaware.MLP206.persistence.EmployeeDAO;
 import com.hexaware.MLP206.persistence.leevDAO;
-enum LeaveType {
-    
-    EL,SL, ML
-  }
-  enum LeaveStatus {
-   //PENDING for pending
-    PENDING,
 
-    // APPROVED for Approved.
-    
-    APPROVED,
-    
-     //DENIED for Denied.
-    
-    REJECTED
-  }
+
 public class leev
 {
-     private static int l_id;
-     private static String l_type;
+     private  int l_id;
+     private LeaveType l_type;
     // private static String l_des;
-     private static String l_status;
-     private static Date l_startdate;
-     private static Date l_enddate;
-     private static int le_id;
+     private  LeaveStatus l_status;
+     private  Date l_startdate;
+     private  Date l_enddate;
+     private  int le_id;
      private int l_Ndays;
      private static String l_Reason;
-     private static Date l_AppliedOn;
+     private Date l_AppliedOn;
 
      static int counter = 2;
 
@@ -45,15 +31,15 @@ public class leev
        return l_id;
      }
 
-     public final String getType() {
+     public final LeaveType getType() {
        return l_type;
      }
 
-    //  public final String getdes() {
-    //    return l_des;
-    //  }
+     // public final String getdes() {
+     // return l_des;
+     // }
 
-     public final String getStatus() {
+     public final LeaveStatus getStatus() {
        return l_status;
      }
 
@@ -86,15 +72,15 @@ public class leev
        this.l_id = leev_id;
      }
 
-     public final void setType(String Type) {
+     public final void setType(LeaveType Type) {
        this.l_type = Type;
      }
 
-    //  public final void Setdes(String l_des) {
-    //    this.l_des = l_des;
-    //  }
+     // public final void Setdes(String l_des) {
+     // this.l_des = l_des;
+     // }
 
-     public final void setStatus(String status) {
+     public final void setStatus(LeaveStatus status) {
        this.l_status = status;
      }
 
@@ -125,8 +111,7 @@ public class leev
 
      @Override
      public final int hashCode() {
-       return Objects.hash(l_id, le_id, l_type, l_status, l_startdate, l_enddate, l_Ndays, l_Reason,
-           l_AppliedOn);
+       return Objects.hash(l_id, le_id, l_type, l_status, l_startdate, l_enddate, l_Ndays, l_Reason, l_AppliedOn);
      }
 
      // default constructor
@@ -142,10 +127,10 @@ public class leev
          return false;
        }
        leev l = (leev) obj;
-       if (Objects.equals(l_id, l.l_id) && Objects.equals(l.l_type, l.l_type) && Objects.equals(l_status, l.l_status) && Objects.equals(l_startdate, l.l_startdate)
-           && Objects.equals(l_enddate, l.l_enddate) && Objects.equals(le_id, l.le_id)
-           && Objects.equals(l_Ndays, l.l_Ndays) && Objects.equals(l_Reason, l.l_Reason)
-           && Objects.equals(l_AppliedOn, l.l_AppliedOn)) {
+       if (Objects.equals(l_id, l.l_id) && Objects.equals(l.l_type, l.l_type) && Objects.equals(l_status, l.l_status)
+           && Objects.equals(l_startdate, l.l_startdate) && Objects.equals(l_enddate, l.l_enddate)
+           && Objects.equals(le_id, l.le_id) && Objects.equals(l_Ndays, l.l_Ndays)
+           && Objects.equals(l_Reason, l.l_Reason) && Objects.equals(l_AppliedOn, l.l_AppliedOn)) {
          return true;
        }
        return false;
@@ -156,13 +141,14 @@ public class leev
      }
 
      /**
+      * @param string
       * @param argEmpId to initialize employee id.
       */
-     public leev(final int l_id, final String l_type, final String status,
-         final Date leev_start_dDate, final Date leev_endDate, final int leev_emp_id, final int ln, final String r,
-         final Date ld) {
+     public leev(final int l_id, final LeaveType l_type, final LeaveStatus l_status, final Date leev_start_dDate,
+         final Date leev_endDate, final int leev_emp_id, final int ln, final String r, final Date ld) {
        this.l_id = l_id;
        this.l_type = l_type;
+       this.l_status = l_status;
        this.l_startdate = leev_start_dDate;
        this.l_enddate = leev_endDate;
        this.le_id = leev_emp_id;
@@ -171,19 +157,16 @@ public class leev
        this.l_AppliedOn = ld;
      }
 
-     
-
-	public leev() {
-	}
-
-	@Override
-     public String toString() {
-       return " leave Id: " + l_id  + "leave status: " + l_status + "leave startdate: "
-           + l_startdate + "leave enddate: " + l_enddate + "leave employee_id: " + le_id + l_Ndays + l_Reason
-           + l_AppliedOn;
+     public leev() {
      }
 
-     public static String approveDeny(final int l_id, final int empId, final String l_status) {
+     @Override
+     public String toString() {
+       return " leave Id: " + l_id + "leave status: " + l_status + "leave startdate: " + l_startdate + "leave enddate: "
+           + l_enddate + "leave employee_id: " + le_id + l_Ndays + l_Reason + l_AppliedOn;
+     }
+
+     public static String approveDeny(final int l_id, final int empId, final LeaveStatus l_status) {
        leev ld = leev.listById(l_id);
        String res = null;
        if (ld != null) {
@@ -197,21 +180,22 @@ public class leev
            res = "You are not authorised to access this employee.";
            return res;
          }
-         if (l_status.equals("APPROVE") && ld.getStatus().equals("PENDING")) {
+         if (l_status.equals(LeaveStatus.APPROVED) && ld.getStatus().equals(LeaveStatus.PENDING)) {
            dbStatus = "APPROVED";
            res = "Leave Approved Successfully";
+           edao().decrement(emplId, noOfDays);
 
-         } else if (l_status.equals("DENY") && ld.getStatus().equals("APPROVED")) {
+         } else if (l_status.equals(LeaveStatus.REJECTED) && ld.getStatus().equals(LeaveStatus.APPROVED)) {
            dbStatus = "REJECTED";
            edao().increment(emplId, noOfDays);
 
            res = "Leave Rejected";
-         } else if (l_status.equals("APPROVE") && ld.getStatus().equals("REJECTED")) {
+         } else if (l_status.equals(LeaveStatus.APPROVED) && ld.getStatus().equals(LeaveStatus.REJECTED)) {
            dbStatus = "APPROVED";
            edao().decrement(emplId, noOfDays);
            res = "Leave Approved Successfully";
          } else {
-           if (l_status.equals("DENY") && ld.getStatus().equals("PENDING")) {
+           if (l_status.equals(LeaveStatus.REJECTED) && ld.getStatus().equals(LeaveStatus.PENDING)) {
              dbStatus = "REJECTED";
              edao().increment(emplId, noOfDays);
              res = "Leave Rejected";
@@ -233,16 +217,15 @@ public class leev
      public static String applyLeave(final int empId, final String startDate, final String endDate, final int noOfdays,
          final String leaveType, final String leaveReason) throws ParseException {
        String s = null;
-
+          int leaveId;
        Employee emplo = Employee.listById(empId);
-     //  LeaveType lt = LeaveType.valueOf(leaveType);
-         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-         Date l_startdate = sdf.parse(startDate);
-         Date l_enddate = sdf.parse(endDate);
+       // LeaveType lt = LeaveType.valueOf(leaveType);
+       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+       Date l_startdate = sdf.parse(startDate);
+       Date l_enddate = sdf.parse(endDate);
 
        if (emplo != null) {
-         
-         
+
          Calendar start = Calendar.getInstance();
          start.setTime(l_startdate);
          Calendar end = Calendar.getInstance();
@@ -257,7 +240,12 @@ public class leev
              count++;
            }
          }
-         System.out.println(count);
+
+         //getting the last row of leaves table
+         leev lastRow = dao().getLastRow();
+         leaveId = lastRow.getleev_id() + 1;
+         //System.out.println("LeaveId:" + leaveId);
+        // System.out.println(count);
 
          long diff = l_enddate.getTime() - l_startdate.getTime();
          System.out.println(diff);
@@ -292,12 +280,14 @@ public class leev
          } else {
            if (emplo.getmgr_id() == 0) {
              leaveStatus = "APPROVED";
-             dao().apply(empId, leaveType, leaveStatus, l_startdate, l_enddate, emplo.gete_id(), bal, l_Reason, appliedDate);
-          s = "Leave Applied Successfully...";
-        } else {
-          leaveStatus = "PENDING";
-          dao().apply(empId,leaveType, leaveStatus, l_startdate, l_enddate, emplo.gete_id(), bal, l_Reason, appliedDate);
-          edao().decrement(empId, bal);
+             dao().apply(leaveId, leaveType, leaveStatus, l_startdate, l_enddate, emplo.gete_id(), bal,l_Reason,
+                 appliedDate);
+             s = "Leave Applied Successfully...";
+           } else {
+             leaveStatus = "PENDING";
+             dao().apply(leaveId, leaveType, leaveStatus, l_startdate, l_enddate, emplo.gete_id(), bal, l_Reason,
+                 appliedDate);
+          //edao().decrement(empId, bal);
           s = "Leave Applied Successfully For "  + (days - count) + " Days.";
         }
       }

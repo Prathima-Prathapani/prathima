@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import com.hexaware.MLP206.model.Employee;
+import com.hexaware.MLP206.model.LeaveStatus;
 import com.hexaware.MLP206.model.leev;
+
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -63,6 +65,7 @@ public class CliMain
      //Out of the Menu list
       case 3:
         // halt since normal exit throws a stacktrace due to jdbc threads not responding
+        option.close();
         Runtime.getRuntime().halt(0);
     }
   
@@ -146,18 +149,18 @@ public class CliMain
   
 
 
-  }
+  } 
   public static void approveDeny() {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter a leave ID:");
     int leaveId = sc.nextInt();
-    System.out.println("Enter Employ Id  ");
+    System.out.println("Enter Your Id");
     int mgrId = sc.nextInt();
-    System.out.println("Decide what you want to do (APPROVE / DENY): ");
+    System.out.println("Decide what you want to do (APPROVED / REJECTED): ");
     String ch = sc.next();
-    String res = leev.approveDeny(leaveId, mgrId, ch);
+    LeaveStatus leave_status = LeaveStatus.valueOf(ch.toUpperCase());
+    String res = leev.approveDeny(leaveId, mgrId, leave_status);
     System.out.println(res);
-    sc.close();
   }
 
 
@@ -200,9 +203,13 @@ public class CliMain
   }
   private void applyLeave() {
     int empid = 0;
+   // int li_id=0;
     while (true) {
       System.out.println("Enter an Employee Id");
       String empId = option.next();
+      // System.out.println("enter leave_id");
+      // li_id=option.nextInt();
+
       try {
         empid = Integer.parseInt(empId);
         Employee.listById(empid).gete_id();
@@ -221,7 +228,7 @@ public class CliMain
       }
     }
     System.out.println();
-    System.out.println("Your available leave balance is: " + Employee.listById(empid).getAvailableLeave(empid));
+    System.out.println("Your available leave balance is: " + Employee.listById(empid).getavail_l(empid));
     String endDate = null;
     String startDate = null;
     while (true) {

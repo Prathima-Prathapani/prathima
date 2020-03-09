@@ -46,7 +46,7 @@ public interface EmployeeDAO  {
    * @param empid the id of the employee
    * @param leavendays for leave no of days
    */
-  @SqlUpdate("UPDATE EMP_DETAILS SET AVAIL_LEAVE_BAL = AVAIL_LEAVE_BAL +:leavendays WHERE EMP_ID = :empid")
+  @SqlUpdate("UPDATE employee SET avail_l = avail_l + :leavendays WHERE empid = :empId")
   void increment(@Bind("empid") int empid, @Bind("l_Ndays") int leavendays);
 
   /**
@@ -54,8 +54,8 @@ public interface EmployeeDAO  {
    * @param empID the id of the employee.
    * @param leaveTaken no of days employee applied leave.
    */
-  @SqlUpdate("UPDATE EMP_DETAILS SET AVAIL_LEAVE_BAL = AVAIL_LEAVE_BAL -:leaveTaken WHERE EMP_ID = :empID")
-  void decrement(@Bind("empID") int empID, @Bind("leaveTaken") int leaveTaken);
+  @SqlUpdate("UPDATE employee SET avail_l = avail_l -:leaveTaken WHERE EMP_ID = :empID")
+  void decrement(@Bind("empID") int empID, @Bind("l_Ndays") int leaveTaken);
 
 
 }
